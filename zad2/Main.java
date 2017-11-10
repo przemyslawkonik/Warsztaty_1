@@ -43,9 +43,9 @@ public class Main {
 				System.out.print("Skreśl " + (i+1) + " liczbę: ");
 				int input = scan.nextInt();
 
-				if (input < 1 || input > 49) {
+				if (input < 1 || input > scope) {
 					System.out.println("Liczba poza zakresem");
-				} else if (isRepeat(input, numbers)) {
+				} else if (Arrays.asList(numbers).contains(input)) {
 					System.out.println("Ta liczba została już skreślona");
 				} else {
 					numbers[i++] = input;
@@ -57,15 +57,6 @@ public class Main {
 		}
 		scan.close();
 		return numbers;
-	}
-
-	private static boolean isRepeat(int value, Integer[] numbers) {
-		for (Integer i : numbers) {
-			if (i != null && i.equals(value)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private static Integer[] generateNumbers() {
