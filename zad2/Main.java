@@ -65,7 +65,7 @@ public class Main {
 			arr[i] = i + 1;
 		}
 		Collections.shuffle(Arrays.asList(arr));
-		return Arrays.copyOf(arr, 6);
+		return Arrays.copyOf(arr, number);
 	}
 
 	private static int matches(Integer[] arr1, Integer[] arr2) {
