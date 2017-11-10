@@ -10,71 +10,81 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public static void main(String[] args) {
+	static final int number = 6;
+	static final int scope = 49;
 
-        Integer[] playerNumbers = new Integer[6];
+	public static void main(String[] args) {
 
-        //pętla pobierająca 6 liczb od użytkownika
-        int i = 0;
-        while (i < playerNumbers.length) {
-            try {
-                System.out.print("Skreśl " + (i + 1) + " liczbę: ");
-                int number = new Scanner(System.in).nextInt();
+		// pobranie liczb od uzytkownika
+		Integer[] playerNumbers = getPlayerNumbers();
 
-                if (number < 1 || number > 49) {
-                    System.out.println("Liczba poza zakresem");
-                } else if (isRepeat(number, playerNumbers)) {
-                    System.out.println("Ta liczba została już skreślona");
-                } else {
-                    playerNumbers[i++] = number;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("To nie jest liczba");
-            }
-        }
+		// sortowanie i wyświetlenie liczb użytkownika
+		Arrays.sort(playerNumbers);
+		System.out.println("Skreślone liczby: " + Arrays.toString(playerNumbers));
 
-        //sortowanie i wyświetlenie liczb użytkownika
-        Arrays.sort(playerNumbers);
-        System.out.println("Skreślone liczby: " + Arrays.toString(playerNumbers));
+		// sortowanie i wyświetlenie wylosowanych liczb
+		Integer[] generatedNumbers = generateNumbers();
+		Arrays.sort(generatedNumbers);
+		System.out.println("Wylosowane liczby: " + Arrays.toString(generatedNumbers));
 
-        //sortowanie i wyświetlenie wylosowanych liczb
-        Integer[] generator = generateNumbers();
-        Arrays.sort(generator);
-        System.out.println("Wylosowane liczby: " + Arrays.toString(generator));
+		// sprawdzenie wygranej
+		int match = matches(playerNumbers, generatedNumbers);
+		if (match >= 3) {
+			System.out.println("Trafiłeś: " + match);
+		}
+	}
 
-        //sprawdzenie wygranej
-        int match = numberOfMatches(playerNumbers, generator);
-        if (match >= 3) {
-            System.out.println("Trafiłeś: " + match);
-        }
-    }
+	static Integer[] getPlayerNumbers() {
+		Integer[] numbers = new Integer[number];
+		Scanner scan = new Scanner(System.in);
 
-    private static boolean isRepeat(int number, Integer[] numbers) {
-        for (Integer i : numbers) {
-            if (i != null && i.equals(number)) {
-                return true;
-            }
-        }
-        return false;
-    }
+		for (int i = 0; i < number;) {
+			try {
+				System.out.print("Skreśl " + (i+1) + " liczbę: ");
+				int input = scan.nextInt();
 
-    private static Integer[] generateNumbers() {
-        Integer[] arr = new Integer[49];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = i + 1;
-        }
-        Collections.shuffle(Arrays.asList(arr));
-        return Arrays.copyOf(arr, 6);
-    }
+				if (input < 1 || input > 49) {
+					System.out.println("Liczba poza zakresem");
+				} else if (isRepeat(input, numbers)) {
+					System.out.println("Ta liczba została już skreślona");
+				} else {
+					numbers[i++] = input;
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("To nie jest liczba");
+				scan.next();
+			}
+		}
+		scan.close();
+		return numbers;
+	}
 
-    private static int numberOfMatches(Integer[] player, Integer[] generator) {
-        int match = 0;
-        for (Integer i : player) {
-            for (Integer j : generator) {
-                if (i.equals(j))
-                    match++;
-            }
-        }
-        return match;
-    }
+	private static boolean isRepeat(int value, Integer[] numbers) {
+		for (Integer i : numbers) {
+			if (i != null && i.equals(value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static Integer[] generateNumbers() {
+		Integer[] arr = new Integer[scope];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = i + 1;
+		}
+		Collections.shuffle(Arrays.asList(arr));
+		return Arrays.copyOf(arr, 6);
+	}
+
+	private static int matches(Integer[] arr1, Integer[] arr2) {
+		int match = 0;
+		for (Integer i : arr1) {
+			for (Integer j : arr2) {
+				if (i.equals(j))
+					match++;
+			}
+		}
+		return match;
+	}
 }
