@@ -28,6 +28,7 @@ public class Main {
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("To nie jest liczba");
+				scan.next();
 			}
 		} while (secretNumber != inputNumber);
 		scan.close();
