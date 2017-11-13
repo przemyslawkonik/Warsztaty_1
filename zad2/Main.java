@@ -10,8 +10,8 @@ import java.util.Scanner;
  */
 public class Main {
 
-	static final int number = 6;
-	static final int scope = 49;
+	static final int NUMBER = 6;
+	static final int SCOPE = 49;
 
 	public static void main(String[] args) {
 
@@ -35,15 +35,15 @@ public class Main {
 	}
 
 	static Integer[] getPlayerNumbers() {
-		Integer[] numbers = new Integer[number];
+		Integer[] numbers = new Integer[NUMBER];
 		Scanner scan = new Scanner(System.in);
 
-		for (int i = 0; i < number;) {
+		for (int i = 0; i < NUMBER;) {
 			try {
 				System.out.print("Skreśl " + (i+1) + " liczbę: ");
 				int input = scan.nextInt();
 
-				if (input < 1 || input > scope) {
+				if (input < 1 || input > SCOPE) {
 					System.out.println("Liczba poza zakresem");
 				} else if (Arrays.asList(numbers).contains(input)) {
 					System.out.println("Ta liczba została już skreślona");
@@ -60,12 +60,12 @@ public class Main {
 	}
 
 	private static Integer[] generateNumbers() {
-		Integer[] arr = new Integer[scope];
+		Integer[] arr = new Integer[SCOPE];
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = i + 1;
 		}
 		Collections.shuffle(Arrays.asList(arr));
-		return Arrays.copyOf(arr, number);
+		return Arrays.copyOf(arr, NUMBER);
 	}
 
 	private static int matches(Integer[] arr1, Integer[] arr2) {

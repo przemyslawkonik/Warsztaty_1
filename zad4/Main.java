@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  */
 public class Main {
 
-	private static final String regex = "([1-9]*[0-9]*)D([1-9][0-9]*)([+-][1-9][0-9]*)?";
+	private static final String REGEX = "([1-9]*[0-9]*)D([1-9][0-9]*)([+-][1-9][0-9]*)?";
 	static int dice = 0, times = 1, tail = 0;
 	static char operator = ' ';
 	static String[] values = new String[3];
@@ -67,7 +67,7 @@ public class Main {
 	}
 
 	static boolean convert(String input) {
-		Pattern pattern = Pattern.compile(regex);
+		Pattern pattern = Pattern.compile(REGEX);
 		Matcher matcher = pattern.matcher(input);
 
 		// gdy metoda matches() zwróci true to dopiero wtedy można używać innych

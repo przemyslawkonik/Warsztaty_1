@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class Main {
 
-    private static final int minLength = 3;
+    private static final int MIN_LENGTH = 3;
 
     public static void main(String[] args) {
         saveWordsFromServiceToFile("http://www.interia.pl/", "span.title", "files/popular_words.txt");
@@ -76,7 +76,7 @@ public class Main {
             Scanner scan = new Scanner(new File(file));
             while (scan.hasNext()) {
                 String word = scan.next();
-                if (word.length() > minLength) {
+                if (word.length() > MIN_LENGTH) {
                     putKeyToMap(word, map);
                 }
             }
