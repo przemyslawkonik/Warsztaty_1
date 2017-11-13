@@ -45,10 +45,12 @@ public class Main {
 			result += new Random().nextInt(dice) + 1;
 		}
 
-		if (operator == '+')
-			result += tail;
-		else if (operator == '-')
-			result -= tail;
+		if (operator == '+') {
+            result += tail;
+        }
+		else if (operator == '-') {
+            result -= tail;
+        }
 
 		return result;
 	}
