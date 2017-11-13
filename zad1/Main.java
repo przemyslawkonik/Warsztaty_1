@@ -1,6 +1,5 @@
 package zad1;
 
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,28 +8,28 @@ import java.util.Scanner;
  */
 public class Main {
 
-	public static void main(String[] args) {
-		final int secretNumber = new Random().nextInt(100) + 1;
-		int inputNumber = 0;
-		final Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) {
+        final int secretNumber = new Random().nextInt(100) + 1;
+        final Scanner scan = new Scanner(System.in);
+        int inputNumber;
 
-		do {
-			System.out.print("Zgadnij liczbę: ");
-			try {
-				inputNumber = scan.nextInt();
+        while (true) {
+            System.out.print("Zgadnij liczbę: ");
+            while (!scan.hasNextInt()) {
+                System.out.print("Podaj poprawna wartosc: ");
+                scan.next();
+            }
+            inputNumber = scan.nextInt();
 
-				if (inputNumber < secretNumber) {
-					System.out.println("Za mało");
-				} else if (inputNumber > secretNumber) {
-					System.out.println("Za dużo");
-				} else {
-					System.out.println("Zgadłeś");
-				}
-			} catch (InputMismatchException e) {
-				System.out.println("To nie jest liczba");
-				scan.next();
-			}
-		} while (secretNumber != inputNumber);
-		scan.close();
-	}
+            if (inputNumber < secretNumber) {
+                System.out.println("Za mało");
+            } else if (inputNumber > secretNumber) {
+                System.out.println("Za dużo");
+            } else {
+                System.out.println("Zgadłeś");
+                scan.close();
+                return;
+            }
+        }
+    }
 }
