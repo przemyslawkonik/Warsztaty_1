@@ -14,7 +14,7 @@ public class Main {
         int attempts = 10, min = 0, max = 1000, guess;
         Scanner scan = new Scanner(System.in);
 
-        while (attempts-- > 0) {
+        while (attempts > 0) {
             guess = ((max - min) / 2) + min;
             System.out.println("Zgaduję: " + guess);
             System.out.println("1 - więcej");
@@ -28,10 +28,12 @@ public class Main {
                 switch (answer) {
                     case 1: {
                         min = guess;
+                        attempts--;
                         break;
                     }
                     case 2: {
                         max = guess;
+                        attempts--;
                         break;
                     }
                     case 3: {
